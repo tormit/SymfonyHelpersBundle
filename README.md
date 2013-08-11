@@ -1,2 +1,4 @@
 SymfonyHelpersBundle
 ====================
+
+Travis is enabled.
