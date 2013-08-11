@@ -24,15 +24,24 @@ class LogUtil
      * @var $monolog Monolog\Logger
      */
     protected static $monolog = null;
+    public static $logFile = null;
 
     protected static function initMonolog($message, $flags = 0)
     {
         if (self::$monolog === null) {
             self::$monolog = new Monolog\Logger('logutil');
 
-            self::$monolog->pushHandler(new Monolog\Handler\StreamHandler(dirname($_SERVER['SCRIPT_FILENAME']) . '/../app/logs/logutil.log'));
+            $logDir = dirname($_SERVER['SCRIPT_FILENAME']) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'logs';
+            if (!file_exists($logDir) || !is_dir($logDir)) {
+                $logDir = __DIR__ . DIRECTORY_SEPARATOR . 'logs';
+                if (!is_dir($logDir)) {
+                    mkdir($logDir, 0777, true);
+                }
+            }
+            self::setLogFile($logDir . DIRECTORY_SEPARATOR . '/logutil.log');
+
+            self::$monolog->pushHandler(new Monolog\Handler\StreamHandler(self::getLogFile()));
             self::$monolog->pushProcessor(new Monolog\Processor\MemoryUsageProcessor());
-            //self::$monolog->pushProcessor(new Monolog\Processor\IntrospectionProcessor());
             self::$monolog->pushProcessor(new Monolog\Processor\WebProcessor());
         }
     }
@@ -103,5 +112,21 @@ class LogUtil
         return function ($message) {
             return $message;
         };
+    }
+
+    /**
+     * @param string $logFile
+     */
+    public static function setLogFile($logFile)
+    {
+        self::$logFile = $logFile;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getLogFile()
+    {
+        return self::$logFile;
     }
 }

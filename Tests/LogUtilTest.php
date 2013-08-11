@@ -16,14 +16,10 @@ class LogUtilTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        self::$logFile = __DIR__ . DIRECTORY_SEPARATOR .
-                         '..' . DIRECTORY_SEPARATOR .
-                         '..' . DIRECTORY_SEPARATOR .
-                         '..' . DIRECTORY_SEPARATOR .
-                         '..' . DIRECTORY_SEPARATOR .
-                         'app' . DIRECTORY_SEPARATOR .
-                         'logs' . DIRECTORY_SEPARATOR .
-                         'logutil.log';
+        // run a logger once to init monolog
+        LogUtil::debug('');
+
+        self::$logFile = LogUtil::$logFile;
     }
 
     protected function readContent()
@@ -55,6 +51,7 @@ class LogUtilTest extends \PHPUnit_Framework_TestCase
         $content = $this->readContent();
         $this->assertContains('logutil.EMERGENCY: LogUtilTest::Emergency test case', $content);
     }
+
     public function testAlert()
     {
         $log = LogUtil::alert('LogUtilTest::Alert test case', 'Whatever');

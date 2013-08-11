@@ -1,0 +1,28 @@
+{
+    "name": "Tormit/symfony-helpers-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 helpers",
+    "keywords": ["helpers", "bundle"],
+    "homepage": "https://github.com/tormit/SymfonyHelpersBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tormi Talv",
+            "email": "tormit@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": "2.3.*",
+        "symfony/monolog-bundle": "2.3.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Tormit\\SymfonyHelpersBundle": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Tormit/SymfonyHelpersBundle"
+}
