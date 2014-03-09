@@ -1,5 +1,5 @@
 {
-    "name": "Tormit/symfony-helpers-bundle",
+    "name": "tormit/symfony-helpers-bundle",
     "type": "symfony-bundle",
     "description": "Symfony2 helpers",
     "keywords": ["helpers", "bundle"],
@@ -24,5 +24,5 @@
         }
     },
     "minimum-stability": "dev",
-    "target-dir": "Tormit/SymfonyHelpersBundle"
+    "target-dir": "tormit/SymfonyHelpersBundle"
 }

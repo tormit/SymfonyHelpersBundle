@@ -9,6 +9,7 @@ namespace Tormit\SymfonyHelpersBundle;
 
 use Monolog;
 use Tormit\SymfonyHelpersBundle\LogMessageProcessor\ArrayProcessor;
+use Tormit\SymfonyHelpersBundle\LogMessageProcessor\ObjectProcessor;
 
 /**
  * Class LogUtil
@@ -107,6 +108,8 @@ class LogUtil
     {
         if (is_array($message)) {
             return new ArrayProcessor();
+        } elseif (is_object($message)) {
+            return new ObjectProcessor();
         }
 
         return function ($message) {
